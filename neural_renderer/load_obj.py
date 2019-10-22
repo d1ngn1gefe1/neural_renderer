@@ -7,8 +7,9 @@ from skimage.io import imread
 
 # import neural_renderer.cuda.load_textures as load_textures_cuda
 from torch.utils.cpp_extension import load
-load_textures_cuda = load(name='load_textures_cuda', sources=['neural_renderer/cuda/load_textures_cuda.cpp',
-                                                              'neural_renderer/cuda/load_textures_cuda_kernel.cu'])
+load_textures_cuda = load(name='load_textures_cuda',
+                          sources=[os.path.join(os.path.dirname(__file__), 'cuda/load_textures_cuda.cpp'),
+                                   os.path.join(os.path.dirname(__file__), 'cuda/load_textures_cuda_kernel.cu')])
 
 texture_wrapping_dict = {'REPEAT': 0, 'MIRRORED_REPEAT': 1,
                          'CLAMP_TO_EDGE': 2, 'CLAMP_TO_BORDER': 3}
