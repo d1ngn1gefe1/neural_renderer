@@ -3,7 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Function
 
-import neural_renderer.cuda.rasterize as rasterize_cuda
+# import neural_renderer.cuda.rasterize as rasterize_cuda
+from torch.utils.cpp_extension import load
+rasterize_cuda = load(name='rasterize_cuda', sources=['neural_renderer/cuda/rasterize_cuda.cpp',
+                                                      'neural_renderer/cuda/rasterize_cuda_kernel.cu'])
 
 DEFAULT_IMAGE_SIZE = 256
 DEFAULT_ANTI_ALIASING = True

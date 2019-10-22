@@ -5,7 +5,10 @@ import torch
 import numpy as np
 from skimage.io import imread
 
-import neural_renderer.cuda.load_textures as load_textures_cuda
+# import neural_renderer.cuda.load_textures as load_textures_cuda
+from torch.utils.cpp_extension import load
+load_textures_cuda = load(name='load_textures_cuda', sources=['neural_renderer/cuda/load_textures_cuda.cpp',
+                                                              'neural_renderer/cuda/load_textures_cuda_kernel.cu'])
 
 texture_wrapping_dict = {'REPEAT': 0, 'MIRRORED_REPEAT': 1,
                          'CLAMP_TO_EDGE': 2, 'CLAMP_TO_BORDER': 3}
